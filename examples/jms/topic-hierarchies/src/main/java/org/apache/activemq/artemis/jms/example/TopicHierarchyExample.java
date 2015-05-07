@@ -26,8 +26,8 @@ import javax.jms.TextMessage;
 import javax.jms.Topic;
 import javax.naming.InitialContext;
 
-import org.apache.activemq.artemis.api.jms.ActiveMQJMSClient;
 import org.apache.activemq.artemis.common.example.ActiveMQExample;
+import org.hornetq.api.jms.HornetQJMSClient;
 
 /**
  * This example demonstrates how a JMS TopicSubscriber can be created to subscribe to a wild-card Topic.
@@ -61,7 +61,7 @@ public class TopicHierarchyExample extends ActiveMQExample
          Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
          // Step 6. Instantiate a topic representing the wildcard we're going to subscribe to
-         Topic topicSubscribe = ActiveMQJMSClient.createTopic("news.europe.#");
+         Topic topicSubscribe = HornetQJMSClient.createTopic("news.europe.#");
 
          // Step 7. Create a consumer (topic subscriber) that will consume using that wildcard
          // The consumer will receive any messages sent to any topic that starts with news.europe
@@ -72,11 +72,11 @@ public class TopicHierarchyExample extends ActiveMQExample
 
          // Step 9. Instantiate some more topic objects corresponding to the individual topics
          // we're going to send messages to
-         Topic topicNewsUsaWrestling = ActiveMQJMSClient.createTopic("news.usa.wrestling");
+         Topic topicNewsUsaWrestling = HornetQJMSClient.createTopic("news.usa.wrestling");
 
-         Topic topicNewsEuropeSport = ActiveMQJMSClient.createTopic("news.europe.sport");
+         Topic topicNewsEuropeSport = HornetQJMSClient.createTopic("news.europe.sport");
 
-         Topic topicNewsEuropeEntertainment = ActiveMQJMSClient.createTopic("news.europe.entertainment");
+         Topic topicNewsEuropeEntertainment = HornetQJMSClient.createTopic("news.europe.entertainment");
 
          // Step 10. Send a message destined for the usa wrestling topic
          TextMessage messageWrestlingNews = session.createTextMessage("Hulk Hogan starts ballet classes");

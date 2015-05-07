@@ -41,9 +41,9 @@ import javax.transaction.xa.XAResource;
 import javax.transaction.xa.Xid;
 
 import org.apache.activemq.artemis.api.core.management.ObjectNameBuilder;
-import org.apache.activemq.artemis.common.example.DummyXid;
 import org.apache.activemq.artemis.common.example.ActiveMQExample;
-import org.apache.activemq.artemis.utils.UUIDGenerator;
+import org.apache.activemq.artemis.common.example.DummyXid;
+import org.hornetq.utils.UUIDGenerator;
 
 /**
  * A simple JMS example showing how to administer un-finished transactions.

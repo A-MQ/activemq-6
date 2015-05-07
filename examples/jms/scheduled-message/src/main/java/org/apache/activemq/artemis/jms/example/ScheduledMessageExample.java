@@ -28,8 +28,8 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.naming.InitialContext;
 
-import org.apache.activemq.artemis.api.core.Message;
 import org.apache.activemq.artemis.common.example.ActiveMQExample;
+import org.hornetq.api.core.Message;
 
 public class ScheduledMessageExample extends ActiveMQExample
 {

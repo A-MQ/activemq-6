@@ -24,11 +24,11 @@ import javax.jms.Queue;
 import javax.jms.Session;
 import javax.naming.InitialContext;
 
-import org.apache.activemq.artemis.api.core.Message;
-import org.apache.activemq.artemis.api.core.client.ClientSession;
-import org.apache.activemq.artemis.api.core.client.SendAcknowledgementHandler;
 import org.apache.activemq.artemis.common.example.ActiveMQExample;
-import org.apache.activemq.artemis.jms.client.ActiveMQSession;
+import org.hornetq.api.core.Message;
+import org.hornetq.api.core.client.ClientSession;
+import org.hornetq.api.core.client.SendAcknowledgementHandler;
+import org.hornetq.jms.client.HornetQSession;
 
 /**
  *
@@ -79,7 +79,7 @@ public class SendAcknowledgementsExample extends ActiveMQExample
 
          // Step 7. Set the handler on the underlying core session
 
-         ClientSession coreSession = ((ActiveMQSession)session).getCoreSession();
+         ClientSession coreSession = ((HornetQSession)session).getCoreSession();
 
          coreSession.setSendAcknowledgementHandler(new MySendAcknowledgementsHandler());
 

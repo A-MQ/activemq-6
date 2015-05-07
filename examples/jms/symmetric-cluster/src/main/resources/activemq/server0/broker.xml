@@ -43,13 +43,14 @@ under the License.
       <!-- Connectors -->
 
       <connectors>
-         <connector name="netty-connector">tcp://localhost:61616</connector>
+         <connector name="netty-connector">tcp://localhost:5445</connector>
+         <connector name="hornetq-netty-connector">tcp://localhost:5445/hornetq</connector>
 
       </connectors>
 
       <!-- Acceptors -->
       <acceptors>
-         <acceptor name="netty-acceptor">tcp://localhost:61616</acceptor>
+         <acceptor name="netty-acceptor">tcp://localhost:5445</acceptor>
       </acceptors>
 
       <!-- Clustering configuration -->
@@ -59,6 +60,13 @@ under the License.
             <group-port>9876</group-port>
             <broadcast-period>100</broadcast-period>
             <connector-ref>netty-connector</connector-ref>
+         </broadcast-group>
+
+         <broadcast-group name="hornetq-broadcast-group">
+            <group-address>231.8.8.8</group-address>
+            <group-port>9877</group-port>
+            <broadcast-period>100</broadcast-period>
+            <connector-ref>hornetq-netty-connector</connector-ref>
          </broadcast-group>
       </broadcast-groups>
 

@@ -25,10 +25,10 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.naming.InitialContext;
 
-import org.apache.activemq.artemis.api.core.client.FailoverEventListener;
-import org.apache.activemq.artemis.api.core.client.FailoverEventType;
 import org.apache.activemq.artemis.common.example.ActiveMQExample;
-import org.apache.activemq.artemis.jms.client.ActiveMQConnection;
+import org.hornetq.api.core.client.FailoverEventListener;
+import org.hornetq.api.core.client.FailoverEventType;
+import org.hornetq.jms.client.HornetQConnection;
 
 /**
  * This example demonstrates how you can listen on failover event on the client side
@@ -65,7 +65,7 @@ public class ClientSideFailoverListerExample extends ActiveMQExample
          // Wait a little while to make sure broadcasts from all nodes have reached the client
          Thread.sleep(5000);
          connectionA = connectionFactory.createConnection();
-         ((ActiveMQConnection)connectionA).setFailoverListener(new FailoverListenerImpl());
+         ((HornetQConnection)connectionA).setFailoverListener(new FailoverListenerImpl());
 
          // Step 5. We create JMS Sessions
          Session sessionA = connectionA.createSession(false, Session.AUTO_ACKNOWLEDGE);
@@ -123,7 +123,7 @@ public class ClientSideFailoverListerExample extends ActiveMQExample
          }
       }
 
-      System.out.println("receive other message from node " + node + ": " + consumer.receive(2000));
+      //System.out.println("receive other message from node " + node + ": " + consumer.receive(2000));
 
    }
 

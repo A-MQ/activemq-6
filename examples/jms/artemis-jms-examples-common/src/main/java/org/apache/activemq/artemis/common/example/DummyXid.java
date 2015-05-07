@@ -18,7 +18,7 @@ package org.apache.activemq.artemis.common.example;
 
 import javax.transaction.xa.Xid;
 
-import org.apache.activemq.artemis.utils.Base64;
+import org.hornetq.utils.Base64;
 
 public class DummyXid implements Xid
 {

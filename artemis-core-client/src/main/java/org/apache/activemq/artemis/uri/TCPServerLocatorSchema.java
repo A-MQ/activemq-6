@@ -123,4 +123,13 @@ public class TCPServerLocatorSchema extends AbstractServerLocatorSchema
       }
       return cb.toString();
    }
+
+   private static String getFactoryName(URI uri)
+   {
+      if (uri.getPath() != null && uri.getPath().contains("hornetq"))
+      {
+         return "org.hornetq.core.remoting.impl.netty.NettyConnectorFactory";
+      }
+      return NettyConnectorFactory.class.getName();
+   }
 }

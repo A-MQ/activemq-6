@@ -25,11 +25,11 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.jms.Topic;
 
-import org.apache.activemq.artemis.api.core.DiscoveryGroupConfiguration;
-import org.apache.activemq.artemis.api.core.UDPBroadcastEndpointFactory;
-import org.apache.activemq.artemis.api.jms.ActiveMQJMSClient;
-import org.apache.activemq.artemis.api.jms.JMSFactoryType;
 import org.apache.activemq.artemis.common.example.ActiveMQExample;
+import org.hornetq.api.core.DiscoveryGroupConfiguration;
+import org.hornetq.api.core.UDPBroadcastGroupConfiguration;
+import org.hornetq.api.jms.HornetQJMSClient;
+import org.hornetq.api.jms.JMSFactoryType;
 
 /**
  * This example demonstrates a cluster of three nodes set up in a symmetric topology - i.e. each
@@ -80,20 +80,20 @@ public class SymmetricClusterExample extends ActiveMQExample
          // connection factory directly we avoid having to worry about a JNDI look-up.
          // In an app server environment you could use HA-JNDI to lookup from the clustered JNDI servers without
          // having to know about a specific one.
-         UDPBroadcastEndpointFactory udpCfg = new UDPBroadcastEndpointFactory();
-         udpCfg.setGroupAddress("231.7.7.7").setGroupPort(9876);
+         UDPBroadcastGroupConfiguration udpCfg = new UDPBroadcastGroupConfiguration();
+         udpCfg.setGroupAddress("231.8.8.8").setGroupPort(9877);
          DiscoveryGroupConfiguration groupConfiguration = new DiscoveryGroupConfiguration();
-         groupConfiguration.setBroadcastEndpointFactory(udpCfg);
+         groupConfiguration.setBroadcastEndpointFactoryConfiguration(udpCfg);
 
-         ConnectionFactory cf = ActiveMQJMSClient.createConnectionFactoryWithHA(groupConfiguration, JMSFactoryType.CF);
+         ConnectionFactory cf = HornetQJMSClient.createConnectionFactoryWithHA(groupConfiguration, JMSFactoryType.CF);
 
          // We give a little while for each server to broadcast its whereabouts to the client
          Thread.sleep(2000);
 
          // Step 2. Directly instantiate JMS Queue and Topic objects
-         Queue queue = ActiveMQJMSClient.createQueue("exampleQueue");
+         Queue queue = HornetQJMSClient.createQueue("exampleQueue");
 
-         Topic topic = ActiveMQJMSClient.createTopic("exampleTopic");
+         Topic topic = HornetQJMSClient.createTopic("exampleTopic");
 
          // Step 3. We create six connections, they should be to different nodes of the cluster in a round-robin fashion
          // and start them

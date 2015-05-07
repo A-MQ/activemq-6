@@ -28,9 +28,9 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.naming.InitialContext;
 
-import org.apache.activemq.artemis.api.jms.ActiveMQJMSClient;
-import org.apache.activemq.artemis.api.jms.management.JMSManagementHelper;
 import org.apache.activemq.artemis.common.example.ActiveMQExample;
+import org.hornetq.api.jms.HornetQJMSClient;
+import org.hornetq.api.jms.management.JMSManagementHelper;
 
 /**
  * This examples demonstrates a connection created to a server. Failure of the network connection is then simulated
@@ -137,7 +137,7 @@ public class ReattachExample extends ActiveMQExample
    private void stopStartAcceptor(final boolean stop) throws Exception
    {
       Hashtable<String, Object> properties = new Hashtable<String, Object>();
-      properties.put("java.naming.factory.initial", "org.apache.activemq.artemis.jndi.ActiveMQInitialContextFactory");
+      properties.put("java.naming.factory.initial", "org.apache.activemq.artemis.common.example.hornetq.HornetQInitialContextFactory");
       properties.put("connectionFactory.ConnectionFactory", "tcp://localhost:61617");
       InitialContext initialContext = new InitialContext(properties);
       ConnectionFactory cf = (ConnectionFactory)initialContext.lookup("ConnectionFactory");
@@ -149,7 +149,7 @@ public class ReattachExample extends ActiveMQExample
 
          Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
-         Queue managementQueue = ActiveMQJMSClient.createQueue("activemq.management");
+         Queue managementQueue = HornetQJMSClient.createQueue("activemq.management");
 
          MessageProducer producer = session.createProducer(managementQueue);
 

@@ -34,9 +34,9 @@ import javax.naming.InitialContext;
 import javax.transaction.xa.XAResource;
 import javax.transaction.xa.Xid;
 
-import org.apache.activemq.artemis.common.example.DummyXid;
 import org.apache.activemq.artemis.common.example.ActiveMQExample;
-import org.apache.activemq.artemis.utils.UUIDGenerator;
+import org.apache.activemq.artemis.common.example.DummyXid;
+import org.hornetq.utils.UUIDGenerator;
 
 /**
  * A simple JMS example showing the usage of XA support in JMS.
